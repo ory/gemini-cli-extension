@@ -7,7 +7,7 @@ You don't need an Ory account or any prior Ory experience to start.
 ## Prerequisites
 
 - [Gemini CLI](https://github.com/google-gemini/gemini-cli) installed and signed in
-- Node.js **≥ 24**
+- Node.js **≥ 24** (matches the Ory plugin toolchain — `nvm use 24` or `volta install node@24`)
 - [Docker](https://docs.docker.com/get-docker/) (only needed for the local Ory stack)
 - macOS or Linux. Windows works via WSL2.
 
@@ -16,7 +16,7 @@ You don't need an Ory account or any prior Ory experience to start.
 In your shell:
 
 ```bash
-gemini extensions install ory-agent-extension
+gemini extensions install https://github.com/ory/gemini-cli-extension
 ```
 
 That's it — skills, TOML slash commands, hooks, and the Ory MCP server are now registered.
@@ -24,20 +24,14 @@ That's it — skills, TOML slash commands, hooks, and the Ory MCP server are now
 <details>
 <summary>Alternative install paths</summary>
 
-If the public extension registry isn't available, either of these registers the same extension:
-
 ```bash
-# Ory-hosted extension source
-gemini extensions install https://github.com/ory/gemini-cli-extension
+# Direct installer; renders a fresh extension manifest and invokes
+# `gemini extensions install` for you. No prior npm install required.
+npx -y @ory/gemini-cli install
+npx -y @ory/gemini-cli uninstall
 ```
 
-```bash
-# Direct installer, no prior npm install required
-npx @ory/gemini-cli install
-npx @ory/gemini-cli uninstall
-```
-
-If the `gemini` binary isn't on your `PATH`, `npx -y -p @ory/gemini-cli ory-gemini-setup` writes the extension config directly.
+If the `gemini` binary isn't on your `PATH`, `npx -y -p @ory/gemini-cli ory-gemini-setup` writes the extension config directly into your project's `.gemini/settings.json`.
 
 </details>
 
@@ -59,18 +53,27 @@ From any project where you'd like Ory authentication, inside Gemini CLI:
 
 3. **Sign in.** Start your app, visit the login page Gemini added, and sign in with the seeded credentials. You now have a real Ory session backed by a real Ory stack — locally, offline, with zero configuration.
 
+4. **Turn on Ory login for the Gemini session itself.** *(Optional but recommended.)* Out of the box the extension only governs your *app*. To also attach an Ory identity to *Gemini's* session — so every tool call is attributed to you, not a fallback `session:<id>` subject — set:
+
+   ```bash
+   export ORY_AUTH_GATE=1
+   ```
+
+   Then restart Gemini CLI. On next session start, Gemini opens an Ory login in your browser; sign in with the same seeded credentials from step 1. This is what makes `permissions enforce` (see [Agent security](#agent-security)) deny on the right identity later.
+
 That's the full Ory DX path. Stop here if you're just evaluating the extension. Continue to [Agent security](#agent-security) when you're ready to enforce.
 
 ## What's included
 
 ### Skills for scaffolding Ory into your application
 
-The extension bundles four skills that Gemini auto-invokes by description. Ask Gemini in natural language or invoke a skill directly:
+The extension bundles five skills that Gemini auto-invokes by description. Ask Gemini in natural language or invoke a skill directly:
 
 - **`ory-auth-setup`** — full project setup. Install the Ory CLI, create an Ory Network project (or use the local one), add Ory Elements, configure the SDK, build the auth pages, wire session middleware.
 - **`ory-login-flow`** — login, registration, recovery, verification, and settings pages with Ory Elements. Next.js App Router and React SPA variants.
 - **`ory-social-login`** — Google, GitHub, Apple, Microsoft, Discord, and other OIDC providers with Jsonnet data mappers.
 - **`ory-local-dev`** — drive the local Ory stack from within Gemini to prototype and test without a remote project.
+- **`ory-permissions-onboarding`** — bootstrap permission tuples for built-in tools, switch between observe and enforce mode, troubleshoot denials.
 
 ### Ory MCP server
 

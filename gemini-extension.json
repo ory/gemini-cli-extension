@@ -1,26 +1,25 @@
 {
   "name": "ory",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Ory authentication, authorization, and distributed tracing for Gemini CLI",
   "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "ory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "-p",
+        "@ory/mcp-server@0.4.0",
+        "ory-mcp-server"
+      ]
+    }
+  },
   "settings": [
     {
       "name": "Ory Project URL",
-      "description": "Your Ory project URL (e.g. https://your-project.projects.oryapis.com)",
+      "description": "Your Ory project URL (e.g. https://your-project.projects.oryapis.com). Leave unset to run in pass-through mode against a local stack.",
       "envVar": "ORY_PROJECT_URL",
       "sensitive": false
-    },
-    {
-      "name": "Ory API Key",
-      "description": "Your Ory API key (starts with ory_pat_)",
-      "envVar": "ORY_API_KEY",
-      "sensitive": true
-    },
-    {
-      "name": "Session Token",
-      "description": "Session token for agent authentication",
-      "envVar": "ORY_SESSION_TOKEN",
-      "sensitive": true
     }
   ]
 }
