@@ -1,0 +1,102 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "name": "ory-session-start",
+            "type": "command",
+            "command": "npx -y -p @ory/gemini-cli@0.3.0 ory-gemini-hook",
+            "timeout": 10000,
+            "description": "Verify agent session via Ory Identities"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "name": "ory-session-end",
+            "type": "command",
+            "command": "npx -y -p @ory/gemini-cli@0.3.0 ory-gemini-hook",
+            "timeout": 5000,
+            "description": "Record session termination via Ory tracing"
+          }
+        ]
+      }
+    ],
+    "BeforeTool": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "name": "ory-before-tool",
+            "type": "command",
+            "command": "npx -y -p @ory/gemini-cli@0.3.0 ory-gemini-hook",
+            "timeout": 5000,
+            "description": "Check tool permissions via Ory Permissions"
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "name": "ory-after-tool",
+            "type": "command",
+            "command": "npx -y -p @ory/gemini-cli@0.3.0 ory-gemini-hook",
+            "timeout": 5000,
+            "description": "Record trace spans for tool executions via Ory"
+          }
+        ]
+      }
+    ],
+    "BeforeToolSelection": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "name": "ory-before-tool-selection",
+            "type": "command",
+            "command": "npx -y -p @ory/gemini-cli@0.3.0 ory-gemini-hook",
+            "timeout": 5000,
+            "description": "Audit-only span for the upcoming tool-selection decision"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "name": "ory-notification",
+            "type": "command",
+            "command": "npx -y -p @ory/gemini-cli@0.3.0 ory-gemini-hook",
+            "timeout": 5000,
+            "description": "Audit permission and notification prompts"
+          }
+        ]
+      }
+    ],
+    "PreCompress": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "name": "ory-pre-compress",
+            "type": "command",
+            "command": "npx -y -p @ory/gemini-cli@0.3.0 ory-gemini-hook",
+            "timeout": 5000,
+            "description": "Audit history compaction events"
+          }
+        ]
+      }
+    ]
+  }
+}

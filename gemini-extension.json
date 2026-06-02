@@ -1,0 +1,26 @@
+{
+  "name": "ory",
+  "version": "0.3.0",
+  "description": "Ory authentication, authorization, and distributed tracing for Gemini CLI",
+  "contextFileName": "GEMINI.md",
+  "settings": [
+    {
+      "name": "Ory Project URL",
+      "description": "Your Ory project URL (e.g. https://your-project.projects.oryapis.com)",
+      "envVar": "ORY_PROJECT_URL",
+      "sensitive": false
+    },
+    {
+      "name": "Ory API Key",
+      "description": "Your Ory API key (starts with ory_pat_)",
+      "envVar": "ORY_API_KEY",
+      "sensitive": true
+    },
+    {
+      "name": "Session Token",
+      "description": "Session token for agent authentication",
+      "envVar": "ORY_SESSION_TOKEN",
+      "sensitive": true
+    }
+  ]
+}
