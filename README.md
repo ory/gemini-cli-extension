@@ -67,13 +67,16 @@ That's the full Ory DX path. Stop here if you're just evaluating the extension. 
 
 ### Skills for scaffolding Ory into your application
 
-The extension bundles five skills that Gemini auto-invokes by description. Ask Gemini in natural language or invoke a skill directly:
+The extension bundles a catalog of skills that Gemini auto-invokes by description. Ask Gemini in natural language or invoke a skill directly:
 
 - **`ory-auth-setup`** — full project setup. Install the Ory CLI, create an Ory Network project (or use the local one), add Ory Elements, configure the SDK, build the auth pages, wire session middleware.
 - **`ory-login-flow`** — login, registration, recovery, verification, and settings pages with Ory Elements. Next.js App Router and React SPA variants.
 - **`ory-social-login`** — Google, GitHub, Apple, Microsoft, Discord, and other OIDC providers with Jsonnet data mappers.
 - **`ory-local-dev`** — drive the local Ory stack from within Gemini to prototype and test without a remote project.
 - **`ory-permissions-onboarding`** — bootstrap permission tuples for built-in tools, switch between observe and enforce mode, troubleshoot denials.
+- **`ory-build-integration`** — pull the runnable subset of an `ory/integrates` template (webhook / config / http-event) into your own app and wire it to your Ory project — no contribution/registry concerns.
+- **`ory-contribute-integration`** — author a brand-new integration as a contribution to `ory/integrates`, including `registry.entry.yaml`, the `Maintained by:` footer, DCO sign-off, and registry regeneration.
+- **`ory-e2b-sandbox`** — scaffold an [E2B](https://e2b.dev) sandbox template that boots with this extension preinstalled and registered, so every sandbox session is gated by Ory auth, permissions, and tracing without any per-sandbox setup.
 
 ### Ory MCP server
 
