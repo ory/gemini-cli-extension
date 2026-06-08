@@ -19,14 +19,18 @@ In your shell:
 gemini extensions install https://github.com/ory/gemini-cli-extension
 ```
 
-That's it — skills, TOML slash commands, hooks, and the Ory MCP server are now registered.
+Then confirm everything landed:
+
+```bash
+npx -y -p @ory/gemini-cli ory-gemini status
+```
+
+`status` is the single source of truth — it prints configuration, user and agent identity, per-tool permission coverage, extension + skill registration, and a tail of recent debug logs. Unconfigured fields show inline as `(unset)`.
 
 <details>
 <summary>Alternative install paths</summary>
 
 ```bash
-# Direct installer; renders a fresh extension manifest and invokes
-# `gemini extensions install` for you. No prior npm install required.
 npx -y @ory/gemini-cli install
 npx -y @ory/gemini-cli uninstall
 ```
