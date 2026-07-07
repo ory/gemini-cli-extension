@@ -45,8 +45,8 @@ npx -y -p @ory/gemini-cli ory-gemini status
 <summary>Alternative install paths</summary>
 
 ```bash
-npx -y @ory/gemini-cli install
-npx -y @ory/gemini-cli uninstall
+npx -y -p @ory/gemini-cli ory-gemini install
+npx -y -p @ory/gemini-cli ory-gemini uninstall
 ```
 
 If the `gemini` binary isn't on your `PATH`, `npx -y -p @ory/gemini-cli ory-gemini-setup` writes the extension config directly into your project's `.gemini/settings.json`.
@@ -116,7 +116,7 @@ Bundled and registered automatically. Exposes the Ory CLI and the Ory Network RE
 /ory:temporal-up   # start a local Temporal dev server (for ory-temporal-worker)
 ```
 
-`local-up` runs a complete Ory on your laptop: the Ory APIs (Identities, OAuth2, Permissions) at `http://localhost:4000`, a login UI on `:3000`, and Jaeger (the trace viewer) on `:16686`. A test user identity is seeded and its credentials are printed for you. Use it to:
+`local-up` runs a complete Ory on your laptop: the Ory APIs (Identities, OAuth2, Permissions) at `http://localhost:4000`, a login UI on `:4455` (not :3000, to avoid Next.js port conflicts), and Jaeger (the trace viewer) on `:16686`. A test user identity is seeded and its credentials are printed for you. Use it to:
 
 - **Learn Ory hands-on** without signing up for a hosted project.
 - **Prototype** flows (login, social, MFA, recovery, permissions) against a real Ory backend.
@@ -264,7 +264,7 @@ Highlights:
 
 ## Troubleshooting
 
-- **`/ory:local-up` fails.** Make sure Docker is running and ports `3000`, `4000`, `4100`, and `16686` are free.
+- **`/ory:local-up` fails.** Make sure Docker is running and ports `4455` (login UI), `4000`, `4100`, and `16686` are free.
 - **PKCE login loops.** Clear persisted state with `npx -y -p @ory/gemini-cli ory-gemini agent unregister` and retry.
 - **`npx` fetches an old version.** Force a fresh fetch: `npx -y -p @ory/gemini-cli@latest ory-gemini …`.
 - **Need more signal.** Set `ORY_AGENT_DEBUG=true` and `ORY_AGENT_LOG_FILE=/tmp/ory.log` to capture structured logs.

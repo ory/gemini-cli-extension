@@ -24,7 +24,7 @@ tool call.
 ## Slash commands
 
 - `/ory:local-up` — start a local Ory instance in Docker (Identities, OAuth2,
-  Permissions, plus a login UI on `:3000` and Jaeger on `:16686`, reachable
+  Permissions, plus a login UI on `:4455` (not :3000, to avoid Next.js port conflicts) and Jaeger on `:16686`, reachable
   through `http://localhost:4000`). Prints seeded test-user credentials.
 - `/ory:local-down` — tear it all down.
 
