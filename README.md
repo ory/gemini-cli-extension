@@ -141,7 +141,7 @@ All prefixed with `npx -y -p @ory/gemini-cli`.
 
 - **`/ory:local-up` fails** — make sure Docker is running and ports `4000`, `4100`, `4455`, and `16686` are free.
 - **Browser sign-in loops** — reset with `ory-gemini agent unregister` and try again.
-- **`npx` grabbed an old version** — force the latest: `npx -y -p @ory/gemini-cli@latest ory-gemini …`.
+- **Install ran but never asked how to connect** — you're almost certainly on a stale `npx` cache. `npx -p @ory/gemini-cli` (no version pin) reuses a previously-downloaded copy instead of re-resolving to the latest, so an older CLI whose install predates the setup wizard can run while you believe you're on the current release. The install banner prints the running version; confirm it with `npx -y -p @ory/gemini-cli ory-gemini version`. To force the current release, clear the cache and reinstall: `rm -rf ~/.npm/_npx` then `npx -y -p @ory/gemini-cli ory-gemini install`. Pinning an exact version (`@ory/gemini-cli@<version>`) also bypasses the cached copy.
 - **Want to see what's happening** — `npx -y -p @ory/gemini-cli ory-gemini status` for a snapshot, `npx -y -p @ory/gemini-cli ory-gemini watch` for the live trace stream, or set `ORY_AGENT_DEBUG=true` for a verbose log. Traces and logs live under `~/.config/ory-agent-plugins/gemini-cli/` (see [See what's happening](#see-whats-happening)).
 
 ## Learn more
