@@ -24,25 +24,29 @@ tool call.
 ## Slash commands
 
 - `/ory:local-up` — start a local Ory instance in Docker (Identities, OAuth2,
-  Permissions, plus a login UI on `:4455` (not :3000, to avoid Next.js port conflicts) and Jaeger on `:16686`, reachable
+  Permissions, plus a login UI on `:4455` (not :3000, to avoid Next.js port conflicts), reachable
   through `http://localhost:4000`). Prints seeded test-user credentials.
 - `/ory:local-down` — tear it all down.
 
 ## Permission mode
 
 After install the extension runs in **observe** mode by default: permission
-denies are recorded as audit spans but tools still execute. Tell the user to
-run `npx -y -p @ory/gemini-cli ory-gemini permissions enforce` once their
-permission set is correct.
+denies are recorded as activity events but tools still execute. The mode is a
+property of the Ory project, read on every session — tell the user that someone
+with access to the project promotes it to **enforce** in the Ory Console (Agent
+Security) once the permission set is correct. There is no CLI command that sets
+it; the plugin only reads it.
 
 If a tool call *is* blocked, the denial reason names the missing relation.
-Suggest `npx -y -p @ory/gemini-cli ory-gemini permissions bootstrap` (grants
-`use` on every built-in tool to the current user) or ask the Ory MCP server
-to write a specific relation tuple.
+Suggest `npx -y -p @ory/gemini-cli ory-gemini permissions` to see exactly
+which tools lack a grant, then have the grant added in the Ory Console (or via
+the Ory MCP server, which can write relations on the user's behalf).
 
 ## Diagnostics
 
 - `npx -y -p @ory/gemini-cli ory-gemini status` — show configuration and
   installation state.
-- Set `ORY_AGENT_DEBUG=true` and `ORY_AGENT_LOG_FILE=~/.config/ory-agent-plugins/ory.log`
-  to capture structured logs.
+- Privacy-safe activity is always appended to the default
+  `~/.config/ory-agent-plugins/gemini-cli/ory-agent-debug.log`; tail it with `jq`.
+- Launch Gemini CLI with `ORY_AGENT_DEBUG=true` for the complete live JSON stream
+  on stderr plus verbose local diagnostics. Secrets are recursively redacted.

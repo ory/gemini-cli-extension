@@ -7,7 +7,7 @@
           {
             "name": "ory-session-start",
             "type": "command",
-            "command": "npx -y -p @ory/gemini-cli@0.14.0 ory-gemini-hook",
+            "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
             "timeout": 10000,
             "description": "Verify the user and agent identities via Ory"
           }
@@ -21,9 +21,9 @@
           {
             "name": "ory-session-end",
             "type": "command",
-            "command": "npx -y -p @ory/gemini-cli@0.14.0 ory-gemini-hook",
+            "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
             "timeout": 5000,
-            "description": "Record session termination via Ory tracing"
+            "description": "Record session termination in the Ory activity log"
           }
         ]
       }
@@ -35,7 +35,7 @@
           {
             "name": "ory-before-tool",
             "type": "command",
-            "command": "npx -y -p @ory/gemini-cli@0.14.0 ory-gemini-hook",
+            "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
             "timeout": 5000,
             "description": "Check tool permissions via Ory Permissions"
           }
@@ -49,9 +49,9 @@
           {
             "name": "ory-after-tool",
             "type": "command",
-            "command": "npx -y -p @ory/gemini-cli@0.14.0 ory-gemini-hook",
+            "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
             "timeout": 5000,
-            "description": "Record trace spans for tool executions via Ory"
+            "description": "Record structured tool execution activity via Ory"
           }
         ]
       }
@@ -63,9 +63,9 @@
           {
             "name": "ory-before-tool-selection",
             "type": "command",
-            "command": "npx -y -p @ory/gemini-cli@0.14.0 ory-gemini-hook",
+            "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
             "timeout": 5000,
-            "description": "Audit-only span for the upcoming tool-selection decision"
+            "description": "Audit-only activity for the upcoming tool-selection decision"
           }
         ]
       }
@@ -77,7 +77,7 @@
           {
             "name": "ory-notification",
             "type": "command",
-            "command": "npx -y -p @ory/gemini-cli@0.14.0 ory-gemini-hook",
+            "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
             "timeout": 5000,
             "description": "Audit permission and notification prompts"
           }
@@ -91,7 +91,7 @@
           {
             "name": "ory-pre-compress",
             "type": "command",
-            "command": "npx -y -p @ory/gemini-cli@0.14.0 ory-gemini-hook",
+            "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
             "timeout": 5000,
             "description": "Audit history compaction events"
           }
