@@ -1,6 +1,6 @@
 {
   "name": "ory",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Ory authentication, authorization, and activity auditing for Gemini CLI",
   "contextFileName": "GEMINI.md",
   "mcpServers": {
