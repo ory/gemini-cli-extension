@@ -119,7 +119,7 @@ npx -y -p @ory/gemini-cli ory-gemini configure \
 
 **Ory Network or OEL.** Either works. For an Ory Network project the URL is `https://<slug>.projects.oryapis.com`; for a self-hosted **Ory Enterprise License** deployment, point `--project-url` at that deployment's base URL and use the sign-in client id from its Agent Security configuration. Everything downstream — sign-in, checks, delegation — is identical.
 
-**There is nothing else for you to create.** The sign-in client, permission model, native-tool blocks, MCP grants, and observe/enforce posture are provisioned in the Console by someone with project access. At runtime the plugin only *reads* permissions, so installing it needs no workspace privilege. Each Gemini session registers its own identity automatically on first use.
+**There is nothing else for you to create.** The sign-in client, permission model, native-tool blocks, MCP server access, and observe/enforce posture are provisioned in the Console by someone with project access. At session start the plugin loads or enrolls Gemini's Talos runtime credential in the OS credential store; tool paths only read it. Installing needs no workspace privilege.
 
 Sign-in runs at the start of every session and never blocks — a declined, skipped, or timed-out login simply leaves that session without a user identity.
 
@@ -132,7 +132,7 @@ ory-gemini install | uninstall        Install (add --project-url to also connect
 ory-gemini status                     Show configuration, identities, native tool access, recent activity
 ory-gemini permissions <cmd>          status  (read-only; blocks + posture live in the Ory Console)
 ory-gemini configure <flags>          Connect a project (--project-url) or --disconnect
-ory-gemini agent <status|unregister>  Manage Gemini's own auto-created identity
+ory-gemini agent <status|unregister>  Inspect runtime status / clear legacy OAuth state
 ory-gemini local <up|down|status|…>   Run / manage a local Ory in Docker
 ory-gemini version                    Print plugin, core, and Node versions (--json for machine-readable)
 ```
@@ -142,7 +142,7 @@ All prefixed with `npx -y -p @ory/gemini-cli`.
 ## Troubleshooting
 
 - **`/ory:local-up` fails** — make sure Docker is running and ports `4000`, `4100`, `4455`, and `16686` are free.
-- **Browser sign-in loops** (after connecting) — reset with `ory-gemini agent unregister` and try again.
+- **Browser sign-in loops** (after connecting) — confirm the reserved login client has all four documented loopback redirect URIs; `agent unregister` only clears legacy agent OAuth state.
 - **Running an older CLI than expected** — `npx -p @ory/gemini-cli` (no version pin) reuses a previously-downloaded copy instead of re-resolving to the latest. The install banner prints the running version; confirm it with `npx -y -p @ory/gemini-cli ory-gemini version`. To force the current release, clear the cache and reinstall: `rm -rf ~/.npm/_npx` then `npx -y -p @ory/gemini-cli ory-gemini install`. Pinning an exact version (`@ory/gemini-cli@<version>`) also bypasses the cached copy.
 
 ## Learn more
