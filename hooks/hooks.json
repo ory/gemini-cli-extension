@@ -8,7 +8,7 @@
             "name": "ory-session-start",
             "type": "command",
             "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
-            "timeout": 10000,
+            "timeout": 300000,
             "description": "Verify the user and agent identities via Ory"
           }
         ]
@@ -22,7 +22,7 @@
             "name": "ory-session-end",
             "type": "command",
             "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
-            "timeout": 5000,
+            "timeout": 60000,
             "description": "Record session termination in the Ory activity log"
           }
         ]
@@ -36,7 +36,7 @@
             "name": "ory-before-tool",
             "type": "command",
             "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
-            "timeout": 5000,
+            "timeout": 60000,
             "description": "Check tool permissions via Ory Permissions"
           }
         ]
@@ -50,7 +50,7 @@
             "name": "ory-after-tool",
             "type": "command",
             "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
-            "timeout": 5000,
+            "timeout": 60000,
             "description": "Record structured tool execution activity via Ory"
           }
         ]
@@ -64,7 +64,7 @@
             "name": "ory-before-tool-selection",
             "type": "command",
             "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
-            "timeout": 5000,
+            "timeout": 60000,
             "description": "Audit-only activity for the upcoming tool-selection decision"
           }
         ]
@@ -78,7 +78,7 @@
             "name": "ory-notification",
             "type": "command",
             "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
-            "timeout": 5000,
+            "timeout": 60000,
             "description": "Audit permission and notification prompts"
           }
         ]
@@ -92,7 +92,7 @@
             "name": "ory-pre-compress",
             "type": "command",
             "command": "node \"${extensionPath}${/}hooks${/}ory-hook.js\"",
-            "timeout": 5000,
+            "timeout": 60000,
             "description": "Audit history compaction events"
           }
         ]
